@@ -108,7 +108,6 @@ module CopyTo
       render_template :copy, "Destination repository already exists" if repo_exists? params[:dest_repo]
       FileUtils.rm_rf repo_path
       begin
-        puts "Temporary directory: #{repo_path}"
         client.create_repository params[:dest_repo], :description => repo.description
         Open3.capture2 "git", "clone", "--quiet", "--branch", params[:source_branch], "https://github.com/#{nwo}", repo_path
         Dir.chdir repo_path
