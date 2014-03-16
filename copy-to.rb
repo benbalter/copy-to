@@ -84,7 +84,7 @@ module CopyTo
     end
 
     def destination_remote
-      "https://#{user.token}:x-oauth-basic@github.com/#{params[:owner]}/#{params[:dest_repo]}"
+      "https://#{user.token}:x-oauth-basic@github.com/#{user.login]}/#{params[:dest_repo]}"
     end
 
     def cache_params
