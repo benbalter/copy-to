@@ -1,0 +1,65 @@
+<form method="POST">
+
+  <% if error %>
+    <div class="row">
+      <div class="col-md-5 col-md-offset-3">
+        <div class="alert alert-danger"><%= error %></div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-1 col-md-offset-3 heading">
+      Copy
+    </div>
+
+    <div class="col-md-4">
+      <img class="avatar" src="https://github.com/<%= repo.owner.login %>.png" />
+      <a href="https://github.com/<%= repo.owner.login %>"><%= repo.owner.login %></a> /
+      <a href="https://github.com/<%= repo.owner.login %>/<%= repo.name %>"><%= repo.name %></a>
+    </div>
+
+    <div class="col-md-2 <% if branches.length == 1 %> hidden<% end %>">
+      Branch:
+      <select name="source_branch" class="branches">
+      <% branches.each do |branch| %>
+        <option <% if branch.name == repo.default_branch %>select="selected"<% end %>>
+          <%= branch.name %>
+        </option>
+      <% end %>
+      </select>
+
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-1 col-md-offset-3 heading">
+      To
+    </div>
+
+    <div class="col-md-4">
+
+      <img class="avatar" src="https://github.com/<%= user.login %>.png" />
+      <a href="https://github.com/<%= user.login %>"><%= user.login %></a> /
+      <input type="text" name="dest_repo" id="repo" value="<%= repo.name %>" />
+
+    </div>
+    <div class="col-md-2 <% if branches.length == 1 %> hidden<% end %>">
+      Branch:
+      <select name="dest_branch" class="branches">
+      <% branches.each do |branch| %>
+        <option <% if branch.name == repo.default_branch %>select="selected"<% end %>>
+          <%= branch.name %>
+        </option>
+      <% end %>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-1 col-md-offset-4">
+      <input id="copy" type="submit" name="copy" class="btn btn-primary" value="Copy!" />
+    </div>
+  </div>
+</form>
