@@ -9,3 +9,4 @@ body {font-size: 2em;  margin-top: 100px;}
 .heading {font-weight: bold; text-align: right; }
 .copy .row {margin-top: 25px; }
 .success { text-align: center; }
+footer { position: absolute; bottom: 15px; right: 15px; }
