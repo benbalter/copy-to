@@ -120,7 +120,6 @@ module CopyTo
     end
 
     get '/' do
-      authenticate!
       render_template :index
     end
 
