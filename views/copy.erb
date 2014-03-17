@@ -57,9 +57,11 @@
     </div>
   </div>
 
+<% unless repo.private? %>
   <div class="row">
     <div class="col-md-1 col-md-offset-4">
       <input id="copy" type="submit" name="copy" class="btn btn-primary" value="Copy!" />
     </div>
   </div>
+<% end %>
 </form>

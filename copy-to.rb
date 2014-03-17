@@ -105,6 +105,7 @@ module CopyTo
     end
 
     def clone_and_push
+      render_template :copy, "Private repositories are not supported" if repo.private?
       render_template :copy, "Destination repository already exists" if repo_exists? params[:dest_repo]
       FileUtils.rm_rf repo_path
       begin
@@ -132,6 +133,7 @@ module CopyTo
         if repo.nil?
           render_template :not_found
         else
+          render_template :copy, "Private repositories are not supported" if repo.private?
           render_template :copy
         end
       end
