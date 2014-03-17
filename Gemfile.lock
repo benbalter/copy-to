@@ -21,7 +21,6 @@ GEM
     rack-protection (1.5.2)
       rack
     rack-ssl-enforcer (0.2.6)
-    redis (3.0.7)
     sawyer (0.5.3)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
@@ -48,6 +47,5 @@ DEPENDENCIES
   octokit
   rack-coffee
   rack-ssl-enforcer
-  redis
   sinatra
   sinatra_auth_github
