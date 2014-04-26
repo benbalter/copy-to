@@ -82,7 +82,7 @@ module CopyTo
     end
 
     def render_template(template, error=nil)
-      halt erb template, :layout => :layout, :locals => locals.merge(:error => error, :template => template)
+      halt erb template, :layout => :layout, :locals => locals.merge(:error => error, :template => template, web_endpoint = Octokit.web_endpoint)
     end
 
     def repo_path
