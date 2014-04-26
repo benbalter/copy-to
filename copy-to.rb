@@ -89,8 +89,12 @@ module CopyTo
       @repo_path ||= File.expand_path "./tmp/#{SecureRandom.hex}", root
     end
 
+    def destination
+      URI.parse Octokit.web_endpoint
+    end
+
     def destination_remote
-      "https://#{user.token}:x-oauth-basic@github.com/#{user.login}/#{params[:dest_repo]}"
+      "#{destination.scheme}://#{user.token}:x-oauth-basic@#{destination.host}/#{user.login}/#{params[:dest_repo]}"
     end
 
     def cache_params
