@@ -120,7 +120,7 @@ module CopyTo
       FileUtils.rm_rf repo_path
       begin
         client.create_repository params[:dest_repo], :description => repo.description
-        Open3.capture2 "git", "clone", "--quiet", "--branch", params[:source_branch], "https://github.com/#{nwo}", repo_path
+        Open3.capture2 "git", "clone", "--quiet", "--branch", params[:source_branch], "#{destination.scheme}://#{destination.host}/#{nwo}", repo_path
         Dir.chdir repo_path
         Open3.capture2 "git", "remote", "add", "downstream", destination_remote
         Open3.capture2 "git", "push", "downstream", params[:dest_branch]
