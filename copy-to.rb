@@ -9,6 +9,13 @@ require 'rack/coffee'
 
 Dotenv.load
 
+stack = Faraday::RackBuilder.new do |builder|
+  builder.response :logger
+  builder.use Octokit::Response::RaiseError
+  builder.adapter Faraday.default_adapter
+end
+Octokit.middleware = stack
+
 module CopyTo
   class App < Sinatra::Base
     enable :sessions
