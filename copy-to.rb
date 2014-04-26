@@ -41,7 +41,7 @@ module CopyTo
     end
 
     def client
-      Octokit::Client.new :access_token => user.token
+      @client ||= Octokit::Client.new :access_token => user.token
     end
 
     def nwo
