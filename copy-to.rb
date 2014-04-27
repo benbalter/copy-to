@@ -9,13 +9,6 @@ require 'rack/coffee'
 
 Dotenv.load
 
-stack = Faraday::RackBuilder.new do |builder|
-  builder.response :logger
-  builder.use Octokit::Response::RaiseError
-  builder.adapter Faraday.default_adapter
-end
-Octokit.middleware = stack
-
 module CopyTo
   class App < Sinatra::Base
     enable :sessions
@@ -86,7 +79,7 @@ module CopyTo
     end
 
     def repo_path
-      @repo_path ||= File.expand_path "./tmp/#{SecureRandom.hex}", root
+      @repo_path ||= File.expand_path "./#{SecureRandom.hex}", root
     end
 
     def destination
@@ -94,7 +87,7 @@ module CopyTo
     end
 
     def destination_remote
-      "#{destination.scheme}://#{user.token}:x-oauth-basic@#{destination.host}/#{user.login}/#{params[:dest_repo]}"
+      "#{destination.scheme}://#{user.token}:x-oauth-basic@#{destination.host}/#{user.login}/#{params[:dest_repo]}.git"
     end
 
     def cache_params
@@ -118,6 +111,7 @@ module CopyTo
       render_template :copy, "Private repositories are not supported" if repo.private?
       render_template :copy, "Destination repository already exists" if repo_exists? params[:dest_repo]
       FileUtils.rm_rf repo_path
+      Dir.chdir root
       begin
         client.create_repository params[:dest_repo], :description => repo.description
         Open3.capture2 "git", "clone", "--quiet", "--branch", params[:source_branch], "#{destination.scheme}://#{user.token}:x-oauth-basic@#{destination.host}/#{nwo}.git", repo_path
