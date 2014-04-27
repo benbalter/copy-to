@@ -14,9 +14,9 @@
     </div>
 
     <div class="col-md-4">
-      <img class="avatar" src="https://github.com/<%= repo.owner.login %>.png" />
-      <a href="https://github.com/<%= repo.owner.login %>"><%= repo.owner.login %></a> /
-      <a href="https://github.com/<%= repo.owner.login %>/<%= repo.name %>"><%= repo.name %></a>
+      <img class="avatar" src="<%= web_endpoint %><%= repo.owner.login %>.png" />
+      <a href="<%= web_endpoint %><%= repo.owner.login %>"><%= repo.owner.login %></a> /
+      <a href="<%= web_endpoint %><%= repo.owner.login %>/<%= repo.name %>"><%= repo.name %></a>
     </div>
 
     <div class="col-md-2 <% if branches.length == 1 %> hidden<% end %>">
@@ -40,8 +40,8 @@
 
     <div class="col-md-4">
 
-      <img class="avatar" src="https://github.com/<%= user.login %>.png" />
-      <a href="https://github.com/<%= user.login %>"><%= user.login %></a> /
+      <img class="avatar" src="<%= web_endpoint %><%= user.login %>.png" />
+      <a href="<%= web_endpoint %><%= user.login %>"><%= user.login %></a> /
       <input type="text" name="dest_repo" id="repo" value="<%= repo.name %>" />
 
     </div>
